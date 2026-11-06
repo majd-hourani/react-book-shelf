@@ -87,6 +87,4 @@ Styles live in `src/index.css` and use CSS variables defined in `:root`, so you 
 - JavaScript (JSX)
 - Plain CSS
 
-## License
 
-This project is open source and available under the [MIT License](LICENSE).

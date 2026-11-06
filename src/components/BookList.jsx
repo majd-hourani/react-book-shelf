@@ -12,8 +12,7 @@ function BookList({ books, onDeleteBook, onEditBook }) {
     );
   });
 
-  console.log(renderedBooks);
-  return <div>{renderedBooks}</div>;
+  return <div className="book-list">{renderedBooks}</div>;
 }
 
 export default BookList;

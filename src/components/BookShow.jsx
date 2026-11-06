@@ -27,10 +27,16 @@ function BookShow({ book, onDeleteBook, onEditBook }) {
   }
 
   return (
-    <div>
+    <div className="book-show">
       {content}
-      <button onClick={handleDeleteBook}>Delete</button>
-      <button onClick={handleEditMode}>Edit</button>
+      <div className="actions">
+        <button className="edit" onClick={handleEditMode}>
+          Edit
+        </button>
+        <button className="delete" onClick={handleDeleteBook}>
+          Delete
+        </button>
+      </div>
     </div>
   );
 }

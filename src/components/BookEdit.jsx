@@ -13,7 +13,7 @@ function BookEdit({ book, onSubmit }) {
   }
 
   return (
-    <div>
+    <div className="book-edit">
       <form onSubmit={handleSubmit}>
         <input value={title} onChange={handleChange} />
         <button>Save</button>

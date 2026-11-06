@@ -30,7 +30,8 @@ function App() {
   }
 
   return (
-    <div>
+    <div className="app">
+      <h1>Reading List</h1>
       <BookList books={books} onDeleteBook={deleteBook} onEditBook={EditBook} />
       <BookCreate onCreateBook={createBook} />
     </div>

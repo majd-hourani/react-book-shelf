@@ -12,9 +12,19 @@ function BookShow({ book, onDeleteBook, onEditBook }) {
     setEditShow(!editMode);
   }
 
+  function closeEditMode() {
+    setEditShow(false);
+  }
+
   let content = <h3>{book.title}</h3>;
   if (editMode) {
-    content = <BookEdit book={book} onEditBook={onEditBook} />;
+    content = (
+      <BookEdit
+        book={book}
+        onEditBook={onEditBook}
+        onCloseEditMode={closeEditMode}
+      />
+    );
   }
 
   return (

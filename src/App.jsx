@@ -17,9 +17,21 @@ function App() {
     );
   }
 
+  function EditBook(id, title) {
+    setBooks(
+      books.map((book) => {
+        if (book.id === id) {
+          return { ...book, title };
+        } else {
+          return book;
+        }
+      }),
+    );
+  }
+
   return (
     <div>
-      <BookList books={books} onDeleteBook={deleteBook} />
+      <BookList books={books} onDeleteBook={deleteBook} onEditBook={EditBook} />
       <BookCreate onCreateBook={createBook} />
     </div>
   );

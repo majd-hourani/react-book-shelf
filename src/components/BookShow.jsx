@@ -16,15 +16,14 @@ function BookShow({ book, onDeleteBook, onEditBook }) {
     setEditShow(false);
   }
 
+  function handleSubmit(id, title) {
+    onEditBook(id, title);
+    closeEditMode();
+  }
+
   let content = <h3>{book.title}</h3>;
   if (editMode) {
-    content = (
-      <BookEdit
-        book={book}
-        onEditBook={onEditBook}
-        onCloseEditMode={closeEditMode}
-      />
-    );
+    content = <BookEdit book={book} onSubmit={handleSubmit} />;
   }
 
   return (

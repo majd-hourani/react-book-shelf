@@ -6,6 +6,7 @@ import { createBook, deleteBook, editBook, fetchBooks } from "./api";
 
 function App() {
   const [books, setBooks] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
 
   async function handleCreateBook(title) {
     try {
@@ -19,10 +20,13 @@ function App() {
   useEffect(function () {
     async function loadBooks() {
       try {
+        setIsLoading(true);
         const books = await fetchBooks();
         setBooks(books);
       } catch (error) {
         console.log(error);
+      } finally {
+        setIsLoading(false);
       }
     }
 
@@ -62,11 +66,17 @@ function App() {
   return (
     <div className="app">
       <h1>Reading List</h1>
-      <BookList
-        books={books}
-        onDeleteBook={handleDeleteBook}
-        onEditBook={EditBook}
-      />
+
+      {isLoading ? (
+        <p>Loading books...</p>
+      ) : (
+        <BookList
+          books={books}
+          onDeleteBook={handleDeleteBook}
+          onEditBook={EditBook}
+        />
+      )}
+
       <BookCreate onCreateBook={handleCreateBook} />
     </div>
   );

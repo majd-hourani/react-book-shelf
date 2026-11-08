@@ -27,12 +27,18 @@ function App() {
     fetchBooks();
   }, []);
 
-  function deleteBook(id) {
-    setBooks(
-      books.filter((book) => {
-        return book.id !== id;
-      }),
-    );
+  async function deleteBook(id) {
+    try {
+      await axios.delete(`http://localhost:3001/books/11`);
+
+      setBooks(
+        books.filter((book) => {
+          return book.id !== id;
+        }),
+      );
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   async function EditBook(id, title) {

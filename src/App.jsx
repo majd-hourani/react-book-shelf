@@ -11,7 +11,7 @@ function App() {
   async function handleCreateBook(title) {
     try {
       const book = await createBook(title);
-      setBooks([...books, book]);
+      setBooks((books) => [...books, book]);
     } catch (error) {
       console.log(error);
     }
@@ -36,11 +36,7 @@ function App() {
   async function handleDeleteBook(id) {
     try {
       await deleteBook(id);
-      setBooks(
-        books.filter((book) => {
-          return book.id !== id;
-        }),
-      );
+      setBooks((books) => books.filter((book) => book.id !== id));
     } catch (error) {
       console.log(error);
     }
@@ -49,14 +45,11 @@ function App() {
   async function EditBook(id, title) {
     try {
       const updatedBook = await editBook(id, title);
-      setBooks(
-        books.map((book) => {
-          if (book.id === id) {
-            return { ...book, ...updatedBook };
-          }
 
-          return book;
-        }),
+      setBooks((books) =>
+        books.map((book) =>
+          book.id === id ? { ...book, ...updatedBook } : book,
+        ),
       );
     } catch (error) {
       console.log(error);

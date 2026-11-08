@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import BookCreate from "./components/BookCreate";
 import BookList from "./components/BookList";
 
@@ -17,6 +17,15 @@ function App() {
 
     setBooks([...books, book]);
   }
+
+  useEffect(function () {
+    async function fetchBooks() {
+      const { data } = await axios.get("http://localhost:3001/books");
+      setBooks(data);
+    }
+
+    fetchBooks();
+  }, []);
 
   function deleteBook(id) {
     setBooks(

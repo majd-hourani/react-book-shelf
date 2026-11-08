@@ -2,46 +2,61 @@ import { useEffect, useState } from "react";
 import BookCreate from "./components/BookCreate";
 import BookList from "./components/BookList";
 
-import axios from "axios";
 import { createBook, deleteBook, editBook, fetchBooks } from "./api";
 
 function App() {
   const [books, setBooks] = useState([]);
 
   async function handleCreateBook(title) {
-    const book = await createBook(title);
-    setBooks([...books, book]);
+    try {
+      const book = await createBook(title);
+      setBooks([...books, book]);
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   useEffect(function () {
     async function loadBooks() {
-      const books = await fetchBooks();
-      setBooks(books);
+      try {
+        const books = await fetchBooks();
+        setBooks(books);
+      } catch (error) {
+        console.log(error);
+      }
     }
 
     loadBooks();
   }, []);
 
   async function handleDeleteBook(id) {
-    await deleteBook(id);
-    setBooks(
-      books.filter((book) => {
-        return book.id !== id;
-      }),
-    );
+    try {
+      await deleteBook(id);
+      setBooks(
+        books.filter((book) => {
+          return book.id !== id;
+        }),
+      );
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   async function EditBook(id, title) {
-    const updatedBook = await editBook(id, title);
-    setBooks(
-      books.map((book) => {
-        if (book.id === id) {
-          return { ...book, ...updatedBook };
-        }
+    try {
+      const updatedBook = await editBook(id, title);
+      setBooks(
+        books.map((book) => {
+          if (book.id === id) {
+            return { ...book, ...updatedBook };
+          }
 
-        return book;
-      }),
-    );
+          return book;
+        }),
+      );
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   return (

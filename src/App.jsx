@@ -3,52 +3,36 @@ import BookCreate from "./components/BookCreate";
 import BookList from "./components/BookList";
 
 import axios from "axios";
+import { createBook, deleteBook, editBook, fetchBooks } from "./api";
 
 function App() {
   const [books, setBooks] = useState([]);
 
-  async function createBook(title) {
-    const { data: book } = await await axios.post(
-      "http://localhost:3001/books",
-      {
-        title,
-      },
-    );
-
+  async function handleCreateBook(title) {
+    const book = await createBook(title);
     setBooks([...books, book]);
   }
 
   useEffect(function () {
-    async function fetchBooks() {
-      const { data } = await axios.get("http://localhost:3001/books");
-      setBooks(data);
+    async function loadBooks() {
+      const books = await fetchBooks();
+      setBooks(books);
     }
 
-    fetchBooks();
+    loadBooks();
   }, []);
 
-  async function deleteBook(id) {
-    try {
-      await axios.delete(`http://localhost:3001/books/11`);
-
-      setBooks(
-        books.filter((book) => {
-          return book.id !== id;
-        }),
-      );
-    } catch (error) {
-      console.log(error);
-    }
+  async function handleDeleteBook(id) {
+    await deleteBook(id);
+    setBooks(
+      books.filter((book) => {
+        return book.id !== id;
+      }),
+    );
   }
 
   async function EditBook(id, title) {
-    const { data: updatedBook } = await axios.put(
-      `http://localhost:3001/books/${id}`,
-      {
-        title,
-      },
-    );
-
+    const updatedBook = await editBook(id, title);
     setBooks(
       books.map((book) => {
         if (book.id === id) {
@@ -63,8 +47,12 @@ function App() {
   return (
     <div className="app">
       <h1>Reading List</h1>
-      <BookList books={books} onDeleteBook={deleteBook} onEditBook={EditBook} />
-      <BookCreate onCreateBook={createBook} />
+      <BookList
+        books={books}
+        onDeleteBook={handleDeleteBook}
+        onEditBook={EditBook}
+      />
+      <BookCreate onCreateBook={handleCreateBook} />
     </div>
   );
 }

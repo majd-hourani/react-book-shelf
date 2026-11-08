@@ -35,14 +35,21 @@ function App() {
     );
   }
 
-  function EditBook(id, title) {
+  async function EditBook(id, title) {
+    const { data: updatedBook } = await axios.put(
+      `http://localhost:3001/books/${id}`,
+      {
+        title,
+      },
+    );
+
     setBooks(
       books.map((book) => {
         if (book.id === id) {
-          return { ...book, title };
-        } else {
-          return book;
+          return { ...book, ...updatedBook };
         }
+
+        return book;
       }),
     );
   }

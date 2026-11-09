@@ -1,10 +1,11 @@
-import { useContext, useEffect } from "react";
+import { useEffect } from "react";
 import BookCreate from "./components/BookCreate";
 import BookList from "./components/BookList";
-import { BooksContext } from "./context/BooksContext";
+import useBooksContext from "./context/BooksContext";
 
 function App() {
-  const { isLoading, loadBooks } = useContext(BooksContext);
+  const { isLoading, loadBooks } = useBooksContext();
+
   useEffect(function () {
     loadBooks();
   }, []);

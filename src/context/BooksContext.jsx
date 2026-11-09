@@ -1,4 +1,4 @@
-import { createContext, useState } from "react";
+import { createContext, useContext, useState } from "react";
 
 import { createBook, deleteBook, editBook, fetchBooks } from "../api.js";
 
@@ -68,6 +68,9 @@ function Provider({ children }) {
   );
 }
 
-// eslint-disable-next-line
-export { BooksContext };
-export default Provider;
+function useBooksContext() {
+  return useContext(BooksContext);
+}
+
+export default useBooksContext;
+export { Provider };

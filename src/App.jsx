@@ -42,7 +42,7 @@ function App() {
     }
   }
 
-  async function EditBook(id, title) {
+  async function handleEditBook(id, title) {
     try {
       const updatedBook = await editBook(id, title);
 
@@ -66,7 +66,7 @@ function App() {
         <BookList
           books={books}
           onDeleteBook={handleDeleteBook}
-          onEditBook={EditBook}
+          onEditBook={handleEditBook}
         />
       )}
 

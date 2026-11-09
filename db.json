@@ -1,14 +1,6 @@
 {
   "books": [
     {
-      "title": "book 1",
-      "id": "LwDR_JmKQOM"
-    },
-    {
-      "title": "book 20",
-      "id": "HRNBXu0kpCE"
-    },
-    {
       "title": "book 300",
       "id": "EFStBfGgW-Q"
     }

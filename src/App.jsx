@@ -1,12 +1,15 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import BookCreate from "./components/BookCreate";
 import BookList from "./components/BookList";
 
 import { createBook, deleteBook, editBook, fetchBooks } from "./api";
+import { BooksContext } from "./context/BooksContext";
 
 function App() {
   const [books, setBooks] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
+
+  const { count, incrementCount } = useContext(BooksContext);
 
   async function handleCreateBook(title) {
     try {
@@ -58,7 +61,8 @@ function App() {
 
   return (
     <div className="app">
-      <h1>Reading List</h1>
+      <h1>Reading List {count}</h1>
+      <button onClick={incrementCount}>increment</button>
 
       {isLoading ? (
         <p>Loading books...</p>

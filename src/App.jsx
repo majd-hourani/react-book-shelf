@@ -1,12 +1,14 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import BookCreate from "./components/BookCreate";
 import BookList from "./components/BookList";
 
 import { createBook, deleteBook, editBook, fetchBooks } from "./api";
+import BooksContext from "./main";
 
 function App() {
   const [books, setBooks] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
+  const value = useContext(BooksContext);
 
   async function handleCreateBook(title) {
     try {
@@ -58,7 +60,7 @@ function App() {
 
   return (
     <div className="app">
-      <h1>Reading List</h1>
+      <h1>Reading List {value}</h1>
 
       {isLoading ? (
         <p>Loading books...</p>

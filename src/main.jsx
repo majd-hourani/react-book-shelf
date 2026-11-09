@@ -12,3 +12,5 @@ createRoot(document.getElementById("root")).render(
     </BooksContext.Provider>
   </StrictMode>,
 );
+
+export default BooksContext;
